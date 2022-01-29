@@ -1,0 +1,21 @@
+{
+  "name": "airbnb_clone",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^5.4.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "bootstrap": "^4.3.1",
+    "dotenv": "^14.3.2",
+    "jquery": "^3.6.0",
+    "popper": "^1.0.1",
+    "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dates": "^21.8.0",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.7.1"
+  }
+}
