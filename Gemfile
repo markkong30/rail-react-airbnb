@@ -10,7 +10,10 @@ gem 'puma', '~> 5.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 4.2.0'
+# gem 'uglifier', '>= 4.2.0'
+gem 'terser', '~> 1.1'
+gem 'sprockets', '~> 4.0'
+
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.x'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -30,6 +33,8 @@ gem 'jbuilder', '~> 2.10'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.13'
 
+gem 'aws-sdk', '~> 3.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -46,6 +51,7 @@ group :development, :test do
   # Added by Altcademy.com
   gem 'awesome_print', '~> 1.8.0'
   gem 'dotenv-rails', '~> 2.7.5'
+  # gem 'dotenv-rails', groups: [:development, :test]
   gem 'factory_bot_rails', '~> 5.1.1'
   gem 'pry-rails', '>= 0.3.9'
   gem 'rspec-rails', '~> 4.0'
@@ -65,5 +71,5 @@ end
 
 group :production do
   # Use pg as the database for Active Record
-  # gem 'pg', '~> 1.1.3'
+  gem 'pg', '~> 1.2.3'
 end

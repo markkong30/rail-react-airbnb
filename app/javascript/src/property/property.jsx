@@ -43,19 +43,20 @@ class Property extends React.Component {
       beds,
       baths,
       image_url,
+      image,
       user,
     } = property
 
     return (
       <Layout>
-        <div className="property-image mb-3" style={{ backgroundImage: `url(${image_url})` }} />
+        <div className="property-image mb-3" style={{ backgroundImage: `url(${image_url || image})` }} />
         <div className="container">
           <div className="row">
             <div className="info col-12 col-lg-7">
               <div className="mb-3">
                 <h3 className="mb-0">{title}</h3>
-                <p className="text-uppercase mb-0 text-secondary"><small>{city}</small></p>
-                <p className="mb-0"><small>Hosted by <b>{user.username}</b></small></p>
+                <p className="text-uppercase mb-0 text-secondary"><small>{city}, {country}</small></p>
+                <p className="mb-0 text-capitalize"><small>Hosted by <b>{user.username}</b></small></p>
               </div>
               <div>
                 <p className="mb-0 text-capitalize"><b>{property_type}</b></p>
