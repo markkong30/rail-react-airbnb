@@ -65,7 +65,7 @@ class SignupWidget extends React.Component {
       .then(data => {
         if (data.success) {
           const params = new URLSearchParams(window.location.search);
-          const redirect_url = params.get('redirect_url') || '/';
+          const redirect_url = params.get('redirect_url') || '/home';
           window.location = redirect_url;
         }
       })
@@ -87,7 +87,7 @@ class SignupWidget extends React.Component {
           <button type="submit" className="btn btn-danger btn-block btn-lg">Sign up</button>
         </form>
         <hr/>
-        <p className="mb-0">Already have an account? <a className="text-primary" onClick={this.props.toggle}>Log in</a></p>
+        <p className="mb-0">Already have an account? <a className="text-primary log-in" onClick={this.props.toggle}>Log in</a></p>
       </React.Fragment>
     )
   }

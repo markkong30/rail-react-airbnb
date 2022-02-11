@@ -4,6 +4,7 @@ import Layout from '../layout';
 import Sidebar from './sidebar';
 import Rent from './rent';
 import List from './list';
+import Booking from './booking/booking';
 import './user.scss'
 
 class User extends React.Component {
@@ -12,6 +13,7 @@ class User extends React.Component {
         this.state = {
             rent: false,
             list: false,
+            booking: false,
         }
     }
 
@@ -21,11 +23,13 @@ class User extends React.Component {
 
         searchParams.has('rent') && this.setState({ rent: true });
         searchParams.has('list') && this.setState({ list: true });
+        searchParams.has('booking') && this.setState({ booking: true });
+
 
     }
 
     render() {
-        const { rent, list } = this.state;
+        const { rent, list, booking } = this.state;
 
         return (
             <div id="user">
@@ -33,6 +37,7 @@ class User extends React.Component {
                     <Sidebar user_id={this.props.user_id} />
                     {rent && <Rent />}
                     {list && <List />}
+                    {booking && <Booking />}
 
                 </Layout>
             </div>

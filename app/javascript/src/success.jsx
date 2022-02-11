@@ -77,15 +77,15 @@ class Success extends React.Component {
                     <h3 className="mb-3 payment">Payment</h3>
                     <div className="price d-flex pt-4">
                       <span>Price per night</span>
-                      <span className='ml-auto'>${price_per_night}</span>
+                      <span className='ml-auto'>$ {price_per_night}</span>
                     </div>
                     <div className="night d-flex mt-2">
                       <span>Nights booked</span>
                       <span className="ml-auto">{days}</span>
                     </div>
                     <div className="total_paid d-flex mt-3">
-                      <span><b>Total Paid</b></span>
-                      <span className="ml-auto"><b>{price_per_night * days}</b></span>
+                      <span><b>Total</b></span>
+                      <span className="ml-auto"><b>$ {price_per_night * days}</b></span>
                     </div>
                   </div>
   
@@ -102,11 +102,9 @@ class Success extends React.Component {
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.querySelector('#params');
   const data = JSON.parse(node.getAttribute('data-params'));
-  // console.log(data.booking_id)
 
   ReactDOM.render(
-    // <Success booking_id={data.booking_id}/>,
-    <Success booking_id={3} />,
+    <Success booking_id={data.id}/>,
     document.body.appendChild(document.createElement('div')),
   )
 })

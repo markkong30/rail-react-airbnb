@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
 
         return (
             <React.Fragment>
-                <div id="sidebar">
+                {/* <div id="sidebar">
                     <div className="toggle">
                         <button className="btn d-none" id="open" onClick={this.toggleOpen}><i className="fas fa-bars" ></i></button>
                         <button className="btn" id="close" onClick={this.toggleClose}><i className="fas fa-times" ></i></button>
@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
 
                     </div>
 
-                </div>
+                </div> */}
             </React.Fragment>
         )
     }

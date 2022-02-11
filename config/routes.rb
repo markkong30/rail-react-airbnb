@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'static_pages#home'
-  # get '/' => 'static_pages#home'
+  root to: 'static_pages#index'
+  get '/home' => 'static_pages#home'
   get '/property/:id' => 'static_pages#property'
   get '/login' => 'static_pages#login'
   get '/booking/:id/success' => 'static_pages#success'
@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   namespace :api do
     # Add routes below this line
     get '/properties/user' => 'properties#list'
-    post '/properties/create' => 'properties#create'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
+    get '/booking/guest' => 'bookings#get_bookings_as_guest'
+    # get '/booking/host' => 'bookings#get_bookings_as_host'
+
 
     get '/authenticated' => 'sessions#authenticated'
     delete '/logout' => 'sessions#destroy'
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   
     resources :users, only: [:create]
     resources :sessions, only: [:create, :destroy]
-    resources :properties, only: [:index, :show, :update]
+    resources :properties, only: [:index, :show, :update, :create]
     resources :bookings, only: [:create]
     resources :charges, only: [:create]
   end

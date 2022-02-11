@@ -18,6 +18,7 @@ class List extends React.Component {
             pending: false,
 
         }
+        
     }
 
     componentDidMount() {
@@ -149,10 +150,10 @@ class List extends React.Component {
         return (
             <div id="listbody">
                 <div className="container">
-                    <div className="row" id="list">
-                        <div className="col-12 py-3 mb-5">
+                    <div  id="list">
+                        <div className=" py-3 mb-5">
                             {loading && <p>loading...</p>}
-                            <div className="section-title">Your Hosting Properties</div>
+                            <p className="section-title">Your Hosting Properties</p>
                             <table>
                                 <thead>
                                     <tr>
@@ -186,6 +187,8 @@ class List extends React.Component {
                                     })}
                                 </tbody>
                             </table>
+                            {properties.length == 0 && <h3 className='no-bookings text-center mt-5'>No bookings were found !</h3>}
+
                         </div>
 
                         {popupUpdate &&

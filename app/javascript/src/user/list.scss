@@ -1,6 +1,9 @@
-#listbody .container {
+#list {
     display: grid;
+    margin-left: 80px;
+    grid-template-columns: 1fr;
     justify-content: center;
+    place-items: center;
 }
 #list .section-title {
     font-size: 1.5rem;
@@ -37,9 +40,8 @@
 }
 
 #list td > a {
-    text-decoration: none;
     color: black;
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 #list .action {
@@ -50,13 +52,28 @@
     background-color: rgba(tomato, 0.1);
 }
 
-@media (max-width: 576px) {
-
-#listbody {
-    table {
-        width: 90vw;
+@media (max-width: 900px) {
+    #list {
+        margin-right: 0;
+        margin-top: -50px;
+        transform: scale(0.8);
+        
     }
 }
+
+@media (max-width: 750px) {
+    #list {
+        table {
+            width: 80vw;
+        }
+    }
+
+    #list .section-title {
+        margin-left: 2rem;
+        
+        // margin-bottom: 120px;
+    }
+
     #list table thead {
         display: none;
     }
@@ -69,18 +86,21 @@
     }
 
     #list {
-        table  {
-            td.title, td.city, td.property_type {
+        table {
+            td.title,
+            td.city,
+            td.property_type {
                 text-align: right;
                 padding-left: 50%;
                 position: relative;
-
             }
             td.action {
                 text-align: center;
             }
 
-            td.title::before, td.city::before, td.property_type::before {
+            td.title::before,
+            td.city::before,
+            td.property_type::before {
                 content: attr(data-label);
                 position: absolute;
                 left: 0;
@@ -101,7 +121,7 @@
 }
 
 #popup-update {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -180,7 +200,7 @@
     .house-logo {
         font-size: 1.5rem;
     }
-    
+
     .img-border {
         padding: 0.5rem 1rem;
         border: 1px solid silver;
@@ -193,7 +213,6 @@
         width: 100px;
         border-radius: 50%;
     }
-    
 }
 
 #popup-update {
@@ -209,7 +228,7 @@
 
 //pending
 
-#list { 
+#list {
     .pending {
         margin-top: 3rem;
     }
@@ -226,24 +245,22 @@
     }
     @for $i from 1 through 6 {
         .pending-dot:nth-child(#{$i}) {
-          animation-delay: #{$i * 0.2}s;
+            animation-delay: #{$i * 0.2}s;
         }
     }
-  
-
 }
 @keyframes scaling {
-    0%, 100%{
-      transform: scale(0.2);
-      background-color: #30FFB7;
+    0%,
+    100% {
+        transform: scale(0.2);
+        background-color: #30ffb7;
     }
-    40%{
-      transform: scale(1);
-      background-color: #07DEFF;
+    40% {
+        transform: scale(1);
+        background-color: #07deff;
     }
-    50%{
-      transform: scale(1);
-      background-color: #0761FF;
+    50% {
+        transform: scale(1);
+        background-color: #0761ff;
     }
-  }
-
+}

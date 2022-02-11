@@ -3,6 +3,7 @@
     // height: 90vh;
     align-items: center;
     justify-content: center;
+    margin-left: 80px;
 
 }
 
@@ -100,7 +101,7 @@ input:focus {
 }
 
 #rent .house.logo {
-    color: rgba(20, 20, 145, 0.8);
+    color: rgb(179, 39, 39);
 }
 
 @media (max-width: 576px) {
@@ -124,7 +125,7 @@ input:focus {
 // pop-up
 
 #create-confirm {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

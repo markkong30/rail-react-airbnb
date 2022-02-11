@@ -1,0 +1,31 @@
+.switch-views {
+    position: relative;
+    margin: 30px 0 10px 120px;
+    display: flex;
+    h3 {
+        color: gray;
+        margin-right: 2rem;
+    }
+}
+.tooltip-views:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 250px;
+    bottom: -10px;
+    display: block;
+    color: grey;
+    font-style: italic;
+    width: 100px;
+}
+
+  
+
+@media (max-width: 500px) {
+    .switch-views {
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+    }
+}

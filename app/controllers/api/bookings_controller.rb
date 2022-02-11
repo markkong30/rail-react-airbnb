@@ -25,11 +25,43 @@ module Api
       end
   
       def property_booking
-        @booking = Booking.find_by(id: params[:id])
-        return render json: { error: 'cannot find booking' }, status: :not_found if !@booking
+        token = cookies.signed[:airbnb_session_token]
+        session = Session.find_by(token: token)
+        return render json: { error: 'user not logged in' }, status: :unauthorized if !session
+
+        @booking = session.user.bookings.find_by(id: params[:id])
+        return render json: { error: 'no access right' }, status: :unauthorized if !@booking
         
         render 'api/bookings/confirm'
       end
+
+      def get_bookings_as_guest
+        token = cookies.signed[:airbnb_session_token]
+        session = Session.find_by(token: token)
+        return render json: { error: 'user not logged in' }, status: :unauthorized if !session
+
+        user = session.user
+        @bookings = user.bookings.where("end_date > ? ", Date.today)
+        return render json: { error: 'cannot find booking' }, status: :not_found if !@bookings
+
+        render 'api/bookings/guest'
+      end
+
+      # def get_bookings_as_host
+      #   token = cookies.signed[:airbnb_session_token]
+      #   session = Session.find_by(token: token)
+      #   return render json: { error: 'user not logged in' }, status: :unauthorized if !session
+
+      #   user = session.user
+      #   property_id = user.properties.id
+      #   bookings = Booking.where(property_id.include(property_id))
+      #   @bookings = bookings.where("end_date > ? ", Date.today)
+      #   return render json: { error: 'cannot find booking' }, status: :not_found if !@bookings
+
+      #   render 'api/bookings/guest'
+      # end
+
+
 
       private
   
