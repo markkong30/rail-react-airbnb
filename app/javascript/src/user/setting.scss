@@ -16,12 +16,13 @@
         }
 
         .input-img {
-            opacity: 0;
+            display: none;
         }
 
         .input-display {
             font-size: 2.5rem;
             color: rgb(94, 94, 94);
+            cursor: pointer;
         }
 
         .btn-save-img {
@@ -29,8 +30,6 @@
             bottom: 0;
             right: -60px;
         }
-
-       
     }
 
     #profile-setting {
@@ -38,6 +37,10 @@
         height: 300px;
         border-radius: 100%;
         border: 1px solid black;
+
+        &.logo {
+            filter: invert(0.3);
+        }
     }
 
     .user-details {
@@ -227,9 +230,9 @@
         }
     }
 
-     //pending
+    //pending
 
-     .pending {
+    .pending {
         position: absolute;
         top: 35%;
         left: 50%;
@@ -287,9 +290,8 @@
     @media (max-width: 500px) {
         .pending {
             top: 25%;
-
         }
-        .pending h4{
+        .pending h4 {
             font-size: 1.2rem;
         }
         .pending-dot {

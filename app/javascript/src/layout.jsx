@@ -89,17 +89,17 @@ class Layout extends React.Component {
 
                   <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
                     <li><a className="dropdown-item" href={`/user/${user_id}/host?booking`}>Dashboard</a></li>
-                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                    <li><a className="dropdown-item" href="#">Settings</a></li>
+                    {/* <li><a className="dropdown-item" href="#">Another action</a></li> */}
+                    <li><a className="dropdown-item" href={`/user/${user_id}/host?setting`}>Settings</a></li>
                     <li><hr className="dropdown-divider" /></li>
                     <li><a href="" className="dropdown-item" onClick={this.logOutHandler}>Log out</a></li>
                   </ul>
                   :
                   <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
                     <li><a className="dropdown-item" href={`/home`}>Find a place</a></li>
-                    <li><a className="dropdown-item" href="/login">Sign up</a></li>
+                    {/* <li><a className="dropdown-item" href="/login"></a></li> */}
                     <li><hr className="dropdown-divider" /></li>
-                    <li><a href="/login" className="dropdown-item">Log in</a></li>
+                    <li><a href="/login" className="dropdown-item">Log in / Sign up</a></li>
                   </ul>
                 }
 
