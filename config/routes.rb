@@ -10,18 +10,26 @@ Rails.application.routes.draw do
 
   namespace :api do
     # Add routes below this line
+
+    #properties
     get '/properties/user' => 'properties#list'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
+
+    #bookings
     get '/booking/guest' => 'bookings#get_bookings_as_guest'
-    # get '/booking/host' => 'bookings#get_bookings_as_host'
-
-
-    get '/authenticated' => 'sessions#authenticated'
-    delete '/logout' => 'sessions#destroy'
     get '/booking/:id' => 'bookings#property_booking'
 
+    #charges
     post '/charges/mark_complete' => 'charges#mark_complete'
-  
+
+    #users
+    put '/users/update' => 'users#update'
+
+    #sessions
+    get '/authenticated' => 'sessions#authenticated'
+    delete '/logout' => 'sessions#destroy'
+
+
     resources :users, only: [:create]
     resources :sessions, only: [:create, :destroy]
     resources :properties, only: [:index, :show, :update, :create]

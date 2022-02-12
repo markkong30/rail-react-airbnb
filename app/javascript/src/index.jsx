@@ -66,7 +66,7 @@ class Index extends React.Component {
                                 <span className="text">Perfect.</span>
                             </h1>
                             <h1 className="hide">
-                                <span className="text">Belongs everywhere!</span>
+                                <span className="text">Best stays in the world here!</span>
                             </h1>
                         </div>
                     </div>

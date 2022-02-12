@@ -65,7 +65,7 @@ class Home extends React.Component {
             <div className="row">
               {properties.map(property => {
                 return (
-                  <div key={property.id} className="col-6 col-lg-4 mb-4 property">
+                  <div key={property.id} className="col-12 col-sm-6 col-lg-4 mb-4 property">
                     <a href={`/property/${property.id}`} className="text-body text-decoration-none">
                       <div className="property-image mb-1 rounded" style={{ backgroundImage: `url(${property.image_url || property.image})` }} />
                       <p className="text-uppercase mb-0 text-secondary"><small><b>{property.city}</b></small></p>

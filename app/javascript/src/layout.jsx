@@ -50,7 +50,7 @@ class Layout extends React.Component {
       .then(handleErrors)
       .then(response => {
         if (response.success) {
-          window.location.replace('/login');
+          window.location.replace('/');
         }
       })
       .catch(error => {
@@ -80,36 +80,34 @@ class Layout extends React.Component {
           {authenticated && <button className="btn" id="open" onClick={this.sideBarToggle}><i className="fas fa-bars" id="bars"></i></button>}
           <a href="/home"><span className="navbar-brand mb-0 ml-3 h1 text-danger">Airbnb<i className="fa-brands fa-airbnb ml-2"></i></span></a>
 
-          
-          <div className="collapse navbar-collapse">
 
+          <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto mr-5">
               <div className="dropdown">
                 <button className="btn btn-light dropdown-toggle" data-toggle="dropdown" id="userDropDown">{username}</button>
+                {authenticated ?
 
-                {authenticated &&
-                  (
-                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
-                      <li><a className="dropdown-item" href={`/user/${user_id}/host?booking`}>Dashboard</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Settings</a></li>
-                      <li><hr className="dropdown-divider" /></li>
-                      <li><a href="" className="dropdown-item" onClick={this.logOutHandler}>Log out</a></li>
-                    </ul>
-                  // ) :
-                  // <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
-                  //   <li><a className="dropdown-item" href={`/home`}>Find a place</a></li>
-                  //   <li><a className="dropdown-item" href="/login">Sign up</a></li>
-                  //   <li><hr className="dropdown-divider" /></li>
-                  //   <li><a href="/login" className="dropdown-item">Log in</a></li>
-                  // </ul>
-                  )
+                  <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
+                    <li><a className="dropdown-item" href={`/user/${user_id}/host?booking`}>Dashboard</a></li>
+                    <li><a className="dropdown-item" href="#">Another action</a></li>
+                    <li><a className="dropdown-item" href="#">Settings</a></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><a href="" className="dropdown-item" onClick={this.logOutHandler}>Log out</a></li>
+                  </ul>
+                  :
+                  <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
+                    <li><a className="dropdown-item" href={`/home`}>Find a place</a></li>
+                    <li><a className="dropdown-item" href="/login">Sign up</a></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><a href="/login" className="dropdown-item">Log in</a></li>
+                  </ul>
                 }
+
+
 
               </div>
             </ul>
           </div>
-          
 
         </nav>
 
@@ -144,9 +142,9 @@ class Layout extends React.Component {
                     </li>
 
                     <li className="links">
-                      <a href="">
-                        <span className='guest icon'><i className="fas fa-house-user"></i></span>
-                        <span className="link-text">Bookings as guest</span>
+                      <a href={`/user/${user_id}/host?setting`}>
+                        <span className='setting icon'><i className="fa-solid fa-gear"></i></span>
+                        <span className="link-text">User settings</span>
                       </a>
                     </li>
                   </ul>

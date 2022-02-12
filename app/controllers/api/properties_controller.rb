@@ -21,7 +21,7 @@ module Api
 
         user = session.user
         @properties = user.properties
-        render 'api/properties/list', status: :ok
+        return render 'api/properties/list', status: :ok
       end
 
       def update
@@ -34,7 +34,7 @@ module Api
         return render json: { error: 'not_found' }, status: :not_found if !@property
 
         @property.update(property_params)
-        render 'api/properties/show'
+        return render 'api/properties/show'
       end
 
       def create
@@ -43,7 +43,6 @@ module Api
         return render json: { error: 'user not logged in' }, status: :unauthorized if !session
 
         begin
-          # @property = Property.create({ user_id: session.user.id, title: params[:property][:title], description: params[:property][:description], city: params[:property][:city], country: params[:property][:country], property_type: params[:property][:property_type], price_per_night: params[:property][:price_per_night], max_guests: params[:property][:max_guests], bedrooms: params[:property][:bedrooms], beds: params[:property][:beds], baths: params[:property][:baths], image_url: params[:property][:image_url] })
           @property = session.user.properties.new(property_params)
           if @property.save
             render 'api/properties/create', status: :created

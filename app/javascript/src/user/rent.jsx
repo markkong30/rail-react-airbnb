@@ -60,7 +60,7 @@ class Rent extends React.Component {
         formData.set('property[baths]', baths);
         document.getElementById('submit-rent').reset();
 
-        fetch(`/api/properties/create`, safeCredentialsFormData({
+        fetch(`/api/properties`, safeCredentialsFormData({
             method: 'POST',
             body: formData,
         }))
