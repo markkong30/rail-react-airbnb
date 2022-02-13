@@ -16,8 +16,12 @@ module Api
       return render json: { error: 'user not logged in' }, status: :unauthorized if !session
 
       @user = session.user
-      @user.update(user_params)
-      return render 'api/users/update'
+
+      if @user.update(user_params)
+        render 'api/users/update', status: :ok
+      else
+        render json: { success: false}, status: :bad_request
+      end
     end
 
     private

@@ -46,17 +46,19 @@ class LoginWidget extends React.Component {
       })
   }
 
-  render () {
+  render() {
     const { email, password, error } = this.state;
     return (
       <React.Fragment>
         <form onSubmit={this.login}>
-          <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} onChange={this.handleChange} required />
-          <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
+          <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email}
+            pattern=".{5,}" onChange={this.handleChange} required />
+          <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password}
+          pattern=".{8,}" onChange={this.handleChange} required />
           <button type="submit" className="btn btn-danger btn-block btn-lg">Log in</button>
           {error && <p className="text-danger mt-2">{error}</p>}
         </form>
-        <hr/>
+        <hr />
         <p className="mb-0">Don't have an account? <a className="text-primary sign-up" onClick={this.props.toggle}>Sign up</a></p>
       </React.Fragment>
     )

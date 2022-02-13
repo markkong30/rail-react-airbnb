@@ -12,6 +12,7 @@ class SignupWidget extends React.Component {
   }
 
   handleChange = (e) => {
+    console.log(e.target.name, e.target.value)
     this.setState({
       [e.target.name]: e.target.value,
     })
@@ -76,18 +77,21 @@ class SignupWidget extends React.Component {
       })
   }
 
-  render () {
+  render() {
     const { email, password, username, error } = this.state;
     return (
       <React.Fragment>
         <form onSubmit={this.signup}>
-          <input name="username" type="text" className="form-control form-control-lg mb-3" placeholder="Username" value={username} onChange={this.handleChange} required />
-          <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} onChange={this.handleChange} required />
-          <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} onChange={this.handleChange} required />
+          <input name="username" type="text" className="form-control form-control-lg mb-3" placeholder="Username" value={username} pattern=".{3,}"
+            onChange={this.handleChange} required />
+          <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} pattern=".{5,}"
+            onChange={this.handleChange} required />
+          <input name="password" type="password" className="form-control form-control-lg mb-3" placeholder="Password" value={password} pattern=".{8,}"
+            onChange={this.handleChange} required />
           <button type="submit" className="btn btn-danger btn-block btn-lg">Sign up</button>
           {error && <p className="text-danger mt-2">{error}</p>}
         </form>
-        <hr/>
+        <hr />
         <p className="mb-0">Already have an account? <a className="text-primary log-in" onClick={this.props.toggle}>Log in</a></p>
       </React.Fragment>
     )

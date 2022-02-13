@@ -2,6 +2,7 @@
 import React from 'react';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import './layout.scss'
+import profile from '../../assets/images/circle-user-regular.svg'
 
 class Layout extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Layout extends React.Component {
       username: 'guest',
       user_id: null,
       authenticated: false,
+      image: null,
     }
 
   }
@@ -22,6 +24,7 @@ class Layout extends React.Component {
           username: data.username,
           user_id: data.user_id,
           authenticated: data.authenticated,
+          image: data.image,
         })
       })
   }
@@ -72,7 +75,7 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { username, user_id, authenticated } = this.state;
+    const { username, user_id, authenticated, image } = this.state;
 
     return (
       <React.Fragment>
@@ -84,7 +87,13 @@ class Layout extends React.Component {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto mr-5">
               <div className="dropdown">
-                <button className="btn btn-light dropdown-toggle" data-toggle="dropdown" id="userDropDown">{username}</button>
+                <button className="btn btn-light dropdown-toggle" data-toggle="dropdown" id="userDropDown">
+                  {image ?
+                    <img className='default-profile' src={image} />
+                    :
+                    <img className='default-profile' src={profile} />
+                  }
+                  {username}</button>
                 {authenticated ?
 
                   <ul className="dropdown-menu dropdown-menu-right" aria-labelledby='userDropDown'>
@@ -117,7 +126,13 @@ class Layout extends React.Component {
               <div className="menu-bar">
                 <div className="upper-menu">
                   <div className="profile-links">
-                    <button className="btn btn-profile" onClick={null}><span className='profile'><i className="far fa-user-circle"></i></span>
+                    <button className="btn-profile" onClick={null}>
+                      {image ?
+                        <img className='profile' src={image} />
+                        :
+                        <img className='profile' src={profile} />
+                      }
+                      {/* <span className='profile'><i className="far fa-user-circle"></i></span> */}
                     </button>
                     <div className='username'>{username}</div>
                   </div>
