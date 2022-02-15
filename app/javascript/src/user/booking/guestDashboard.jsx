@@ -91,7 +91,6 @@ class GuestDashboard extends React.Component {
                         </div>
                         <div className="card">
                             <div className="card-text">
-                                {/* <div className="numbers">1,504</div> */}
                                 <div className="card-name">History</div>
                             </div>
                             <div className="card-icon">

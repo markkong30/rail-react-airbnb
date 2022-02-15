@@ -1,7 +1,7 @@
 import React from "react";
 
 const UpdateMessage = (props) => {
-    if (this.props.messageFail) {
+    if (props.messageFail) {
         return (
             <div className="fail-message">
                 <span className="fail logo"><i className="fa-regular fa-circle-xmark"></i></span>

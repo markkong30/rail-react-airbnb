@@ -55,14 +55,6 @@ class Setting extends React.Component {
         this.setState({ updatePassword });
     }
 
-    updateUserDetails = e => {
-        // const { name, value } = e.target;
-        // if (e.target.checkValidity()) {
-        //     this.setState({ [name]: value });
-        // }
-        // console.log(name, value)
-    }
-
     visibilityToggle = e => {
         const input = document.getElementById('input-user-password')
         if (e.target.checked) {
@@ -172,7 +164,7 @@ class Setting extends React.Component {
                         {updateUsername ?
                             <form onSubmit={this.submitUserDetails}>
                                 <input className='input-update' type="text" name="username" data-update="updateUsername"
-                                    pattern="[0-9a-z]{3,10}" onChange={this.updateUserDetails} required />
+                                    pattern="[0-9a-z]{3,10}" required />
                                 <button className="btn btn-info btn-update">Update</button>
                                 <button className="btn btn-close" onClick={this.updateUsernameToggle}><i className="fa-solid fa-xmark"></i></button>
                             </form>
@@ -188,8 +180,8 @@ class Setting extends React.Component {
                         <span className="attribute">Email</span>
                         {updateEmail ?
                             <form onSubmit={this.submitUserDetails}>
-                                <input className='input-update' type="text" name="email" data-update="updateEmail"
-                                    pattern=".{5,}" onChange={this.updateUserDetails} required />
+                                <input className='input-update' type="email" name="email" data-update="updateEmail"
+                                    pattern=".{5,}" required />
                                 <button className="btn btn-info btn-update">Update</button>
                                 <button className="btn btn-close" onClick={this.updateEmailToggle}><i className="fa-solid fa-xmark"></i></button>
                             </form>
@@ -206,7 +198,7 @@ class Setting extends React.Component {
                             <div>
                                 <form onSubmit={this.submitUserDetails}>
                                     <input className='input-update' id="input-user-password" type="password" name="password" data-update="updatePassword"
-                                        pattern=".{8,}" onChange={this.updateUserDetails} required />
+                                        pattern=".{8,}" required />
                                     <button className="btn btn-info btn-update">Update</button>
                                     <button className="btn btn-close-password" onClick={this.updatePasswordToggle}><i className="fa-solid fa-xmark"></i></button>
                                 </form>

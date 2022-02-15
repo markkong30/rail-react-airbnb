@@ -19,9 +19,7 @@ class Update extends React.Component {
             messageSuccess: false,
             messageFail: false,
             pending: false,
-
         }
-
     }
 
     componentDidMount() {
@@ -50,39 +48,47 @@ class Update extends React.Component {
                     property: data.property,
                     popupUpdateInput: false,
                     popupUpdate: true,
-                    message: false,
+                    messageSuccess: false,
+                    messageFail: false,
                     pending: false,
                 })
                 document.getElementById('popup-update-form').reset();
-
             })
-
     }
 
     chooseUpdateItem = (e) => {
-        this.setState({ messageSuccess: false, messageFail: false ,pending: false });
+        this.setState({ messageSuccess: false, messageFail: false, pending: false });
+        const input = document.getElementById('update-input-submit');
+        if (input !== null) {
+            input.value = '';
+        }
 
         const form = document.getElementById('updateform')
         const updateItem = form.options[form.selectedIndex].getAttribute('name');
         const updateItemDisplay = e.target.value;
         this.setState({ updateItem, updateItemDisplay });
 
-        const input = document.getElementById('popup-updateinput');
+        // const input = document.getElementById('popup-updateinput');
         if (updateItem) {
             this.setState({ popupUpdateInput: true });
         } else this.setState({ popupUpdateInput: false });
-
 
     }
 
     updateItem = (e) => {
         e.preventDefault();
         this.setState({
-            pending: true, 
+            pending: true,
             popupUpdateInput: false,
         });
 
         let item;
+        if (item == '') {
+            setTimeout(() => {
+                this.setState({ pending: false, messageFail: true });
+            }, 2000)
+            return;
+        }
         if (this.state.updateItem !== 'image') {
             item = document.querySelector('#update-input-submit').value;
         } else if (this.state.updateItem == 'image') {
@@ -104,12 +110,13 @@ class Update extends React.Component {
                 document.getElementById('popup-update-form').reset();
 
                 const preview = document.querySelector('.img-preview.img-update');
-                preview.classList.add('d-none');
+                if (preview) {
+                    preview.classList.add('d-none');
+                }
 
                 setTimeout(() => {
                     this.setState({ pending: false, messageSuccess: true });
                 }, 2000)
-
             })
             .catch(error => {
                 console.log(error.message);
@@ -118,7 +125,6 @@ class Update extends React.Component {
                 }, 2000)
 
             })
-
     }
 
     imagePreview = (e) => {
@@ -128,7 +134,6 @@ class Update extends React.Component {
             const src = URL.createObjectURL(image);
             preview.src = src;
             preview.classList.remove('d-none');
-
         }
     }
 
@@ -150,7 +155,7 @@ class Update extends React.Component {
             <div id="listbody">
                 <div className="container">
                     <div id="update">
-                        <div className=" py-3 mb-5">
+                        <div className=" update-table py-3 mb-5">
                             {loading && <p>loading...</p>}
                             <p className="section-title">Your Hosting Properties</p>
                             <table>
@@ -220,7 +225,14 @@ class Update extends React.Component {
                                                     <form onSubmit={this.updateItem}>
                                                         <div className="inputgroup">
                                                             <p>Current: <span className="ml-3 text-secondary">{currentValue}</span></p>
-                                                            <p>Update: <span className="ml-2"><input className="input-update" type="text" id="update-input-submit" /></span>
+                                                            <p>Update: <span className="ml-2">
+                                                                {updateItem == 'property_type' || updateItem == 'title' || updateItem == 'city' || updateItem == 'country' || updateItem == 'description' ?
+                                                                    <input className="input-update" type="text" id="update-input-submit" />
+                                                                    :
+                                                                    <input className="input-update" type="number" id="update-input-submit" />
+                                                                }
+
+                                                            </span>
                                                             </p>
 
                                                         </div>
@@ -248,8 +260,9 @@ class Update extends React.Component {
                                         )
                                     }
 
-                                    {messageSuccess && <UpdateMessage messageSuccess={true} messageFail={false}/>}
-                                    {messageFail && <UpdateMessage messageSuccess={false} messageFail={true}/>}
+                                    {messageSuccess && <UpdateMessage messageSuccess={messageSuccess} messageFail={messageFail} />}
+                                    {messageFail && <UpdateMessage messageSuccess={messageSuccess} messageFail={messageFail} />}
+
 
                                     <div className="close-button">
                                         <button className="btn btn-close" onClick={this.toggleClose}><i className="fas fa-times" ></i></button>

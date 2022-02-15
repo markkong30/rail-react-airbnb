@@ -97,6 +97,7 @@ class Rent extends React.Component {
         navbar.classList.toggle('blur');
         sidebar.classList.toggle('blur');
         popup.classList.toggle('visible');
+        document.getElementById('img-preview').src = "";
         this.setState({ pending: false, success: false, fail: false })
 
     }
@@ -107,7 +108,7 @@ class Rent extends React.Component {
         return (
             <div id="rent">
                 <div className="create-form">
-                    <div className="title">Rent a New Property</div>
+                    <div className="title">Host a New Property</div>
                     <form id="submit-rent" onSubmit={this.formSubmit}>
                         <div className="form-details">
                             <div className="input-box">
@@ -128,23 +129,23 @@ class Rent extends React.Component {
                             </div>
                             <div className="input-box">
                                 <span className="details">Price per night</span>
-                                <input type="text" name="price_per_night" onChange={this.formInputChange} pattern={/[0-9]/} min="1" max="99999" required />
+                                <input type="number" name="price_per_night" onChange={this.formInputChange} min="1" max="99999" required />
                             </div>
                             <div className="input-box">
                                 <span className="details">Maximum guests</span>
-                                <input type="text" name="max_guests" onChange={this.formInputChange} pattern={/[0-9]/} min="1" max="20" required />
+                                <input type="number" name="max_guests" onChange={this.formInputChange}  min="1" max="20" required />
                             </div>
                             <div className="input-box">
                                 <span className="details">Bedrooms</span>
-                                <input type="text" name="bedrooms" onChange={this.formInputChange} pattern={/[0-9]/} min="1" max="20" required />
+                                <input type="number" name="bedrooms" onChange={this.formInputChange} min="1" max="20" required />
                             </div>
                             <div className="input-box">
                                 <span className="details">Beds</span>
-                                <input type="text" name="beds" onChange={this.formInputChange} pattern={/[0-9]/} min="1" max="20" required />
+                                <input type="text" name="beds" onChange={this.formInputChange}min="1" max="20" required />
                             </div>
                             <div className="input-box">
                                 <span className="details">Baths</span>
-                                <input type="text" name="baths" onChange={this.formInputChange} pattern={/[0-9]/} min="1" max="20" required />
+                                <input type="number" name="baths" onChange={this.formInputChange} min="1" max="20" required />
                             </div>
                             <div className="input-box w-100">
                                 <span className="details">Description</span>

@@ -1,7 +1,6 @@
 #host-dashboard {
     .card-box {
         position: relative;
-        // width: 100%;
         padding: 20px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -18,7 +17,6 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        cursor: pointer;
 
         .numbers {
             font-weight: 500;
@@ -37,11 +35,8 @@
     }
 
     .card:hover {
-        // background: linear-gradient(to right, #cb356b, #bd3f32);
-        // background: linear-gradient(to right, #ddd6f3, #faaca8);
         background: linear-gradient(to right, #e53935, #e35d5b);
         border-color: white;
-
     }
     .card:hover .numbers,
     .card:hover .card-name,
@@ -74,8 +69,6 @@
     .select-menu {
         display: flex;
         flex-direction: column;
-        // justify-content: center;
-        // align-items: center;
         width: 100%;
         z-index: 0;
 
@@ -85,7 +78,7 @@
             margin-bottom: 1rem;
         }
         #select-property {
-            width: 20vw;
+            width: 20vw;    
         }
     }
 
@@ -98,8 +91,6 @@
         height: 50vh;
         overflow-y: scroll;
 
-        // align-items: center;
-
         table {
             border-collapse: collapse;
         }
@@ -109,7 +100,6 @@
             color: grey;
             margin-bottom: 1.5rem;
             letter-spacing: 2px;
-
         }
         .paid {
             text-align: center;
@@ -161,7 +151,6 @@
             border-radius: 10px;
             color: white;
         }
-        
     }
 
     @media (max-width: 900px) {
@@ -190,15 +179,4 @@
             }
         }
     }
-    
-    // @media (max-width: 400px) {
-    //     .main-content {
-    //         margin-left: 80px !important;
-    //         #select-property {
-    //             width: 60vw !important;
-    //         }
-    //     }
-    // }
-
-
 }

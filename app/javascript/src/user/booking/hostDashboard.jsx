@@ -11,7 +11,6 @@ class HostDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // properties: [],
             propertyOptions: [{ value: 'All', label: 'All' }],
             selectedProperties: [],
             allProperties: [],
@@ -75,44 +74,11 @@ class HostDashboard extends React.Component {
             }
         }
         this.setState ({ selectedProperties, earnings })
-
-
-
-        // let selectedProperties = [];
-        // let earnings = 0;
-        // for (const id of property_id) {
-        //     fetch(`/api/properties/${id}/bookings`)
-        //         .then(handleErrors)
-        //         .then(response => {
-        //             const selectedPropertiesMerge = [...selectedProperties, ...response.bookings]
-        //             selectedProperties = selectedPropertiesMerge;
-        //             console.log(selectedProperties)
-        //             this.setState({ selectedProperties });
-
-        //             const bookings = response.bookings;
-        //             console.log(bookings);
-
-        //             for (const booking of bookings) {
-        //                 if (booking.amount.length > 0) {
-        //                     earnings += parseFloat(booking.amount[0])
-        //                     this.setState({ earnings })
-        //                 }
-        //             }
-
-        //         })
-        // };
     }
 
     switchViews = (checked) => {
         this.setState({ checked });
     }
-
-    // isOpen = () => {
-    //     if (this.state.isOpen == true) {
-    //         return this.setState ({ isOpen: true });
-    //     };
-    //     return this.setState ({ isOpen: false });
-    // }
 
     render() {
         const { propertyOptions, selectedProperties, allProperties, earnings } = this.state;
@@ -151,7 +117,6 @@ class HostDashboard extends React.Component {
                         </div>
                         <div className="card">
                             <div className="card-text">
-                                {/* <div className="numbers">1,504</div> */}
                                 <div className="card-name">History</div>
                             </div>
                             <div className="card-icon">
@@ -165,7 +130,6 @@ class HostDashboard extends React.Component {
                             <h5>Select properties</h5>
                             <Select
                                 defaultMenuIsOpen
-                                // onMenuOpen={this.isOpen}
                                 closeMenuOnSelect={false}
                                 components={animatedComponents}
                                 defaultValue={propertyOptions[0]}
@@ -175,7 +139,6 @@ class HostDashboard extends React.Component {
                                 noOptionsMessage={() => 'No properties found !'}
                                 className="basic-multi-select"
                                 id="select-property"
-                                // value={selectedOption}
                                 onChange={this.getSelectedOption}
                                 theme={(theme) => ({
                                     ...theme,

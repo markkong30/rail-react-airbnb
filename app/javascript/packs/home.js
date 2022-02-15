@@ -1,2 +1,2 @@
 // home.js
-import '@src/home/home.jsx';
+import '@src/home/home';
