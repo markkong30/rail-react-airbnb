@@ -4,15 +4,14 @@ import Layout from './layout';
 import gsap from 'gsap';
 import { handleErrors } from '@utils/fetchHelper';
 import './index.scss'
-import { data } from 'jquery';
 
 class Index extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-    //     }
-    // }
+        }
+    }
 
     componentDidMount() {
         fetch('/api/authenticated')
