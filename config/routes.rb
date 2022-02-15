@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'static_pages#index'
+  get '/' => 'static_pages#index'
   get '/home' => 'static_pages#home'
   get '/property/:id' => 'static_pages#property'
   get '/login' => 'static_pages#login'
