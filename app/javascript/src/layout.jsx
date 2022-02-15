@@ -27,9 +27,9 @@ class Layout extends React.Component {
           image: data.image,
           home: true,
         })
-        if (data.authenticated ) {
-          this.props.isLoggedIn();
-        }
+        // if (data.authenticated ) {
+        //   this.props.isLoggedIn();
+        // }
       })
   }
 
