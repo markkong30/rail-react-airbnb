@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   after_validation :hash_password
 
+  
   private
 
   def hash_password

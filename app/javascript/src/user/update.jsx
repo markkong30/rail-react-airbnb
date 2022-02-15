@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './list.scss'
+import './update.scss'
 import { safeCredentialsFormData, handleErrors } from '@utils/fetchHelper';
+import Pending from '../utils/pending';
+import UpdateMessage from '../utils/message';
 
-class List extends React.Component {
+class Update extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +16,12 @@ class List extends React.Component {
             updateItemDisplay: '',
             popupUpdate: false,
             popupUpdateInput: false,
-            message: false,
+            messageSuccess: false,
+            messageFail: false,
             pending: false,
 
         }
-        
+
     }
 
     componentDidMount() {
@@ -57,9 +60,7 @@ class List extends React.Component {
     }
 
     chooseUpdateItem = (e) => {
-        // const message = document.querySelector('#popup-update>.success-message');
-        // message.classList.add('d-none');
-        this.setState({ message: false, pending:false });
+        this.setState({ messageSuccess: false, messageFail: false ,pending: false });
 
         const form = document.getElementById('updateform')
         const updateItem = form.options[form.selectedIndex].getAttribute('name');
@@ -76,6 +77,10 @@ class List extends React.Component {
 
     updateItem = (e) => {
         e.preventDefault();
+        this.setState({
+            pending: true, 
+            popupUpdateInput: false,
+        });
 
         let item;
         if (this.state.updateItem !== 'image') {
@@ -97,27 +102,21 @@ class List extends React.Component {
             .then(response => {
                 console.log(response)
                 document.getElementById('popup-update-form').reset();
-                // document.getElementById('popup-updateinput').classList.add('d-none')
-                this.setState({
-                    popupUpdateInput: false,
-                    pending: true,
-                    
-                });
-
-                // const message = document.querySelector('#popup-update>.success-message');
-                // message.classList.remove('d-none');
 
                 const preview = document.querySelector('.img-preview.img-update');
                 preview.classList.add('d-none');
 
+                setTimeout(() => {
+                    this.setState({ pending: false, messageSuccess: true });
+                }, 2000)
+
             })
             .catch(error => {
                 console.log(error.message);
-            })
-            .then(()=> {
-                setTimeout(()=> {
-                    this.setState({ pending:false, message: true });
+                setTimeout(() => {
+                    this.setState({ pending: false, messageFail: true });
                 }, 2000)
+
             })
 
     }
@@ -138,7 +137,7 @@ class List extends React.Component {
     }
 
     render() {
-        const { loading, properties, updateItem, updateItemDisplay, property, popupUpdate, popupUpdateInput, message, pending } = this.state;
+        const { loading, properties, updateItem, updateItemDisplay, property, popupUpdate, popupUpdateInput, messageSuccess, messageFail, pending } = this.state;
 
         let currentValue;
         for (let key in property) {
@@ -150,7 +149,7 @@ class List extends React.Component {
         return (
             <div id="listbody">
                 <div className="container">
-                    <div  id="list">
+                    <div id="update">
                         <div className=" py-3 mb-5">
                             {loading && <p>loading...</p>}
                             <p className="section-title">Your Hosting Properties</p>
@@ -248,30 +247,15 @@ class List extends React.Component {
                                             </div>
                                         )
                                     }
-                                    {message &&
-                                        (
-                                            <div className="success-message">
-                                                <span className="success logo"><i className="far fa-check-circle"></i></span>
-                                                <h5 >Your property has been successfully updated!</h5>
-                                            </div>
-                                        )
-                                    }
+
+                                    {messageSuccess && <UpdateMessage messageSuccess={true} messageFail={false}/>}
+                                    {messageFail && <UpdateMessage messageSuccess={false} messageFail={true}/>}
 
                                     <div className="close-button">
                                         <button className="btn btn-close" onClick={this.toggleClose}><i className="fas fa-times" ></i></button>
                                     </div>
-                                    {pending &&
-                                        (
-                                            <div className="pending text-center">
-                                                <h4 className='my-3'>Pending</h4>
-                                                <div className="pending-dot"></div>
-                                                <div className="pending-dot"></div>
-                                                <div className="pending-dot"></div>
-                                                <div className="pending-dot"></div>
-                                                <div className="pending-dot"></div>
-                                            </div>
-                                        )}
 
+                                    {pending && <Pending />}
 
                                 </div>
 
@@ -285,4 +269,4 @@ class List extends React.Component {
     }
 }
 
-export default List;
+export default Update;

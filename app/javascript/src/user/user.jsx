@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '../layout';
 import Rent from './rent';
-import List from './list';
+import Update from './update';
 import Booking from './booking/booking';
 import Setting from './setting';
 import './user.scss'
@@ -12,7 +12,7 @@ class User extends React.Component {
         super(props);
         this.state = {
             rent: false,
-            list: false,
+            update: false,
             booking: false,
             setting: false,
         }
@@ -22,7 +22,7 @@ class User extends React.Component {
         const searchParams = new URLSearchParams(window.location.search);
 
         searchParams.has('rent') && this.setState({ rent: true });
-        searchParams.has('list') && this.setState({ list: true });
+        searchParams.has('list') && this.setState({ update: true });
         searchParams.has('booking') && this.setState({ booking: true });
         searchParams.has('setting') && this.setState({ setting: true });
 
@@ -30,13 +30,13 @@ class User extends React.Component {
     }
 
     render() {
-        const { rent, list, booking, setting } = this.state;
+        const { rent, update, booking, setting } = this.state;
 
         return (
             <div id="user">
                 <Layout>
                     {rent && <Rent />}
-                    {list && <List />}
+                    {update && <Update />}
                     {booking && <Booking />}
                     {setting && <Setting />}
 

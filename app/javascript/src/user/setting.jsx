@@ -1,5 +1,6 @@
 import React from 'react';
 import { safeCredentials, safeCredentialsFormData, handleErrors } from '@utils/fetchHelper';
+import Pending from '@utils/pending';
 import './setting.scss';
 import profile from '../../../assets/images/circle-user-regular.svg'
 
@@ -10,6 +11,7 @@ class Setting extends React.Component {
             authenticated: false,
             username: 'guest',
             email: null,
+            password: null,
             updateUsername: false,
             updateEmail: false,
             updatePassword: false,
@@ -54,9 +56,11 @@ class Setting extends React.Component {
     }
 
     updateUserDetails = e => {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-        console.log(name, value)
+        // const { name, value } = e.target;
+        // if (e.target.checkValidity()) {
+        //     this.setState({ [name]: value });
+        // }
+        // console.log(name, value)
     }
 
     visibilityToggle = e => {
@@ -85,7 +89,7 @@ class Setting extends React.Component {
             .then(handleErrors)
             .then(response => {
                 console.log(response.user);
-                this.setState({ [update]: false })
+                this.setState({ [update]: false, [name]: value })
             })
             .catch(error => {
                 console.log(error)
@@ -150,7 +154,7 @@ class Setting extends React.Component {
                     {(image !== null || imageDisplay !== null) ?
                         <img id="profile-setting" src={imageDisplay || image} />
                         :
-                        <img id="profile-setting" className='logo' src={profile} />                          
+                        <img id="profile-setting" className='logo' src={profile} />
                     }
                     <label className='img-label'>
                         <input type="file" accept="image/*" className='input-img'
@@ -167,7 +171,8 @@ class Setting extends React.Component {
                         <span className="attribute">Username</span>
                         {updateUsername ?
                             <form onSubmit={this.submitUserDetails}>
-                                <input className='input-update' type="text" name="username" data-update="updateUsername" onChange={this.updateUserDetails} />
+                                <input className='input-update' type="text" name="username" data-update="updateUsername"
+                                    pattern="[0-9a-z]{3,10}" onChange={this.updateUserDetails} required />
                                 <button className="btn btn-info btn-update">Update</button>
                                 <button className="btn btn-close" onClick={this.updateUsernameToggle}><i className="fa-solid fa-xmark"></i></button>
                             </form>
@@ -183,7 +188,8 @@ class Setting extends React.Component {
                         <span className="attribute">Email</span>
                         {updateEmail ?
                             <form onSubmit={this.submitUserDetails}>
-                                <input className='input-update' type="text" name="email" data-update="updateEmail" onChange={this.updateUserDetails} />
+                                <input className='input-update' type="text" name="email" data-update="updateEmail"
+                                    pattern=".{5,}" onChange={this.updateUserDetails} required />
                                 <button className="btn btn-info btn-update">Update</button>
                                 <button className="btn btn-close" onClick={this.updateEmailToggle}><i className="fa-solid fa-xmark"></i></button>
                             </form>
@@ -199,7 +205,8 @@ class Setting extends React.Component {
                         {updatePassword ?
                             <div>
                                 <form onSubmit={this.submitUserDetails}>
-                                    <input className='input-update' id="input-user-password" type="password" name="password" data-update="updatePassword" onChange={this.updateUserDetails} />
+                                    <input className='input-update' id="input-user-password" type="password" name="password" data-update="updatePassword"
+                                        pattern=".{8,}" onChange={this.updateUserDetails} required />
                                     <button className="btn btn-info btn-update">Update</button>
                                     <button className="btn btn-close-password" onClick={this.updatePasswordToggle}><i className="fa-solid fa-xmark"></i></button>
                                 </form>
@@ -217,17 +224,8 @@ class Setting extends React.Component {
                     </div>
                 </div>
 
-                {pending &&
-                    (
-                        <div className="pending text-center">
-                            <h4 className='my-3'>Saving</h4>
-                            <div className="pending-dot"></div>
-                            <div className="pending-dot"></div>
-                            <div className="pending-dot"></div>
-                            <div className="pending-dot"></div>
-                            <div className="pending-dot"></div>
-                        </div>
-                    )}
+                {pending &&  <Pending />}
+                
             </div>
         )
     }

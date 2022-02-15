@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     #properties
     get '/properties/user' => 'properties#list'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
+    get '/properties/search' => 'properties#get_properties_by_search'
+    get '/properties/filter' => 'properties#get_properties_by_filter'
+    get '/properties/search&filter' => 'properties#get_properties_by_search_and_filter'
 
     #bookings
     get '/booking/guest' => 'bookings#get_bookings_as_guest'

@@ -1,14 +1,24 @@
 #rent {
     display: flex;
-    // height: 90vh;
     align-items: center;
     justify-content: center;
-    margin-left: 80px;
+    margin-bottom: 2rem;
+    // margin-left: 40px;
+    width: 100%;
 
+    .create-form {
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        flex-direction: column;
+        width: 60%;
+        margin-top: 2rem;
+        margin-left: 80px;
+    }
 }
 
-#rentbody {
-    position:relative;
+#rent {
+    position: relative;
 }
 
 #rent .title {
@@ -17,11 +27,10 @@
     position: relative;
     margin-bottom: 1rem;
     margin-top: 1rem;
-
 }
 
 #rent .title::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     height: 3px;
@@ -37,33 +46,29 @@ form .form-details {
 
 .form-details .input-box {
     width: calc(100% / 2 - 20px);
-    margin: 10px 0; 
+    margin: 10px 0;
 }
 
-.input-box input{
-    width: 100%;    
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
+#rent {
+    .input-box input, textarea {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        border-bottom-width: 2px;
+        transition: all 0.3s ease;
+    }
 
-}
+    .input-box .details {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
 
-.input-box .details {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
-
-// .input-box input:focus,
-// .input-box input:valid {
-//     border-color: tomato;
-// }
-
-input:focus {
-    border-color: rgba(255, 116, 92, 0.8);
+    input:focus, textarea:focus {
+        border-color: rgba(255, 116, 92, 0.8);
+    }
 }
 
 #btn-create-property {
@@ -79,7 +84,7 @@ input:focus {
 }
 
 #img-create-input {
-        display: none;
+    display: none;
 }
 
 #img-border {
@@ -89,7 +94,6 @@ input:focus {
     padding: 10px;
     outline: none;
     border-bottom-width: 2px;
-
 }
 
 #img-preview {
@@ -101,7 +105,7 @@ input:focus {
 }
 
 #rent .house.logo {
-    color: rgb(179, 39, 39);
+    color: rgb(202, 63, 63);
 }
 
 @media (max-width: 576px) {
@@ -110,12 +114,12 @@ input:focus {
     }
     #img-preview {
         position: absolute;
-        display: block; 
-        width: 100%;
-        max-height: 100px;
-        top: 100px;
-        left: 30%;
-        
+        display: block;
+        max-width: 200px;
+        height: auto;
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     #btn-create-property {
         margin-top: 180px;
@@ -138,13 +142,17 @@ input:focus {
     visibility: hidden;
     opacity: 0;
     transition: 0.3s ease-in;
-    
 }
-
 
 #create-confirm .status {
     text-align: center;
     background-color: rgb(105, 212, 105);
+    height: 100px;
+}
+
+#create-confirm .status-fail {
+    text-align: center;
+    background-color: rgba(red, 0.7);
     height: 100px;
 }
 
@@ -155,10 +163,12 @@ input:focus {
 
 #create-confirm .logo {
     font-size: 60px;
-    color: rgba(255, 255, 255, 0.8)
+    color: rgba(255, 255, 255, 0.8);
 }
 
-#rent.blur > :not(#create-confirm), #sidebar.blur, nav.blur  {
+#rent.blur > :not(#create-confirm),
+#sidebar.blur,
+nav.blur {
     filter: blur(5px);
     pointer-events: none;
 }
@@ -170,7 +180,7 @@ input:focus {
 
 //pending
 
-#create-confirm { 
+#create-confirm {
     .pending {
         position: absolute;
         left: 50%;
@@ -178,7 +188,7 @@ input:focus {
         transform: translate(-50%, -50%);
         width: 100%;
     }
-    
+
     .pending-dot {
         display: inline-block;
         height: 2.5rem;
@@ -191,23 +201,22 @@ input:focus {
     }
     @for $i from 1 through 6 {
         .pending-dot:nth-child(#{$i}) {
-          animation-delay: #{$i * 0.2}s;
+            animation-delay: #{$i * 0.2}s;
         }
     }
-  
-
 }
 @keyframes scaling {
-    0%, 100%{
-      transform: scale(0.2);
-      background-color: #30FFB7;
+    0%,
+    100% {
+        transform: scale(0.2);
+        background-color: #30ffb7;
     }
-    40%{
-      transform: scale(1);
-      background-color: #07DEFF;
+    40% {
+        transform: scale(1);
+        background-color: #07deff;
     }
-    50%{
-      transform: scale(1);
-      background-color: #0761FF;
+    50% {
+        transform: scale(1);
+        background-color: #0761ff;
     }
-  }
+}

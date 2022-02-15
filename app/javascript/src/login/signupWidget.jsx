@@ -41,6 +41,7 @@ class SignupWidget extends React.Component {
         }
       })
       .catch(error => {
+        console.log(error)
         this.setState({
           error: 'Could not sign up.',
         })
@@ -82,7 +83,7 @@ class SignupWidget extends React.Component {
     return (
       <React.Fragment>
         <form onSubmit={this.signup}>
-          <input name="username" type="text" className="form-control form-control-lg mb-3" placeholder="Username" value={username} pattern=".{3,}"
+          <input name="username" type="text" className="form-control form-control-lg mb-3" placeholder="Username" value={username} pattern="[0-9a-z]{3,10}"
             onChange={this.handleChange} required />
           <input name="email" type="text" className="form-control form-control-lg mb-3" placeholder="Email" value={email} pattern=".{5,}"
             onChange={this.handleChange} required />

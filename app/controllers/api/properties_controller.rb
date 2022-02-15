@@ -6,6 +6,31 @@ module Api
   
         render 'api/properties/index', status: :ok
       end
+
+      def get_properties_by_search
+        @properties = Property.where("lower(city) like ? OR lower(country) like ?", "%#{params[:city].downcase}%", "%#{params[:country].downcase}%").order(created_at: :desc).page(params[:page]).per(6)
+        return render json: { error: 'not_found' }, status: :not_found if !@properties
+
+        render 'api/properties/index', status: :ok
+      end 
+
+      def get_properties_by_filter
+        @properties = Property.where("lower(property_type) like ?", "%#{params[:type].downcase}%").page(params[:page]).order(created_at: :desc).per(6)
+        return render json: { error: 'not_found' }, status: :not_found if !@properties
+
+        render 'api/properties/index', status: :ok
+      end
+
+      def get_properties_by_search_and_filter
+        properties = Property.where("lower(city) like ? OR lower(country) like ?", "%#{params[:city].downcase}%", "%#{params[:country].downcase}%")
+
+        @properties = properties.where("lower(property_type) like ?", "%#{params[:type].downcase}%").order(created_at: :desc).page(params[:page]).per(6)
+
+        return render json: { error: 'not_found' }, status: :not_found if !@properties
+
+        render 'api/properties/index', status: :ok
+      end
+
   
       def show
         @property = Property.find_by(id: params[:id])

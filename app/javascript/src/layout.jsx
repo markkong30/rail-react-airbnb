@@ -1,7 +1,7 @@
 // layout.js
 import React from 'react';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
-import './layout.scss'
+import './layout.scss';
 import profile from '../../assets/images/circle-user-regular.svg'
 
 class Layout extends React.Component {
@@ -25,7 +25,11 @@ class Layout extends React.Component {
           user_id: data.user_id,
           authenticated: data.authenticated,
           image: data.image,
+          home: true,
         })
+        if (data.authenticated ) {
+          this.props.isLoggedIn();
+        }
       })
   }
 
