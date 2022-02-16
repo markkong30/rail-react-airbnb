@@ -230,7 +230,7 @@ class Home extends React.Component {
 
             <div className="row">
               {(properties.length == 0 && loading == false) && <h4 className='empty-search'>No properties were found!</h4>}
-              {(loading) && Array.from(new Array(6)).map((ele, i) => {
+              {/* {(loading) && Array.from(new Array(6)).map((ele, i) => {
                 return (
                   <div className="col-12 col-sm-6 col-lg-4 mb-4 property" key={i}>
                     <SkeletonTheme color="#999999" >
@@ -242,7 +242,7 @@ class Home extends React.Component {
                   </div>
                 )
               })
-              }
+              } */}
 
               {properties.map(property => {
                 return (
