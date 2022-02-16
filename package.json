@@ -16,6 +16,7 @@
     "react": "^16.8.6",
     "react-dates": "^21.8.0",
     "react-dom": "^16.8.6",
+    "react-loading-skeleton": "^3.0.3",
     "react-select": "^5.2.2",
     "react-switch": "^6.0.0",
     "react-toggle": "^4.1.2"

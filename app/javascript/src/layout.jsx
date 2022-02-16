@@ -89,7 +89,7 @@ class Layout extends React.Component {
 
 
           <div className="collapse navbar-collapse">
-            <ul className="navbar-nav ml-auto mr-5">
+            <ul className="navbar-nav ml-auto">
               <div className="dropdown">
                 <button className="btn btn-light dropdown-toggle" data-toggle="dropdown" id="userDropDown">
                   {image ?

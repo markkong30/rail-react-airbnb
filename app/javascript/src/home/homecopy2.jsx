@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import Search from './search';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import { motion } from 'framer-motion/dist/framer-motion';
+import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion';
 import { handleErrors } from '@utils/fetchHelper';
 import './home.scss';
 
@@ -21,29 +21,27 @@ class Home extends React.Component {
       search: null,
       filtering: false,
       filter: null,
-
+      imageLoading: true,
+      images: 0,
     }
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      fetch('/api/properties?page=1')
-        .then(handleErrors)
-        .then(data => {
-          console.log(data)
-          this.setState({
-            properties: data.properties,
-            total_pages: data.total_pages,
-            next_page: data.next_page,
-            loading: false,
-          })
+    fetch('/api/properties?page=1')
+      .then(handleErrors)
+      .then(data => {
+        console.log(data)
+        this.setState({
+          properties: data.properties,
+          total_pages: data.total_pages,
+          next_page: data.next_page,
+          loading: false,
         })
-    }, 1000)
+      })
   }
 
   searchProperties = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
     const search = document.querySelector('.input-search').value;
     const filter = document.querySelector('.btn-filter.active').innerText;
     this.setState({ search, searching: true });
@@ -61,14 +59,12 @@ class Home extends React.Component {
           properties: data.properties,
           total_pages: data.total_pages,
           next_page: data.next_page,
-          loading: false,
         })
         document.querySelector('.search-box').reset();
       })
   }
 
   filterProperties = e => {
-    this.setState({ loading: true });
     const filter = e.target.innerText;
     const search = this.state.search;
     const buttons = document.querySelectorAll('.btn-filter');
@@ -93,14 +89,13 @@ class Home extends React.Component {
     fetch(`/api/properties/filter?page=1&type=${type}`)
       .then(handleErrors)
       .then(data => {
-        console.log(data)
+        console.log(data, this.state.loading)
         this.setState({
           properties: data.properties,
           total_pages: data.total_pages,
           next_page: data.next_page,
           filter,
           filtering: true,
-          loading: false,
         })
       })
 
@@ -124,7 +119,6 @@ class Home extends React.Component {
           next_page: data.next_page,
           filter,
           filtering: true,
-          loading: false,
         })
       })
   }
@@ -204,13 +198,45 @@ class Home extends React.Component {
       })
   }
 
-  handleImageLoaded = (e) => {
-    e.target.parentNode.classList.remove('d-none');
-    e.target.parentNode.nextSibling.classList.add('d-none')
+  handleImageLoaded = () => {
+    if (this.state.properties.length > 6) {
+      return this.setState({ imageLoading: false });
+
+    }
+
+    this.setState(state => {
+      return {
+        images: state.images + 1
+      }
+    }, () => {
+      const { images, properties } = this.state;
+      console.log(images, properties)
+      if (images == properties.length) {
+        this.setState({ imageLoading: false });
+        const arr = document.querySelectorAll('.home-properties')
+        for (const ele of arr) {
+          ele.classList.remove('d-none')
+        }
+        // if (images <= 6) {
+        //   this.setState({ images: 0 })
+        // }
+      }
+
+    })
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(prevState.properties)
+    if (prevState.properties !== this.state.properties) {
+      console.log('hi')
+      this.setState({ images: 0, imageLoading: true })
+    }
+
   }
 
   render() {
-    const { properties, next_page, loading, isLoggedIn, search, searching } = this.state;
+    const { properties, next_page, loading, isLoggedIn, search, searching, imageLoading } = this.state;
 
     return (
       <Layout isLoggedIn={this.isLoggedIn}>
@@ -232,7 +258,8 @@ class Home extends React.Component {
 
             <div className="row">
               {(properties.length == 0 && loading == false) && <h4 className='empty-search'>No properties were found!</h4>}
-              {(loading) && Array.from(new Array(6)).map((ele, i) => {
+
+              {(imageLoading && properties.length <= 6) && Array.from(new Array(6)).map((ele, i) => {
                 return (
                   <div className="col-12 col-sm-6 col-lg-4 mb-4 property" key={i}>
                     <SkeletonTheme color="#999999" >
@@ -246,27 +273,21 @@ class Home extends React.Component {
               })
               }
 
-              {properties.map(property => {
+              {loading || properties.map((property, index) => {
                 return (
-                  <motion.div layout key={property.id} className="col-12 col-sm-6 col-lg-4 mb-4 property">
-                    <a href={`/property/${property.id}`} className="text-body text-decoration-none d-none">
-                      {<img className="property-image mb-1 rounded img-fluid" src={property.image_url || property.image} onLoad={this.handleImageLoaded} />}
-                      {/* <Skeleton width={"100%"} style={{ borderRadius: 10, paddingTop: "60%" }} /> */}
+                  <div key={property.id} className={`col-12 col-sm-6 col-lg-4 mb-4 property home-properties ${properties.length <= 6 && "d-none"}`} >
+                    <a href={`/property/${property.id}`} className="text-body text-decoration-none">
+                      <img className="property-image mb-1 rounded img-fluid" src={property.image_url || property.image} onLoad={this.handleImageLoaded} />
                       <p className="text-uppercase mb-0 text-secondary"><small><b>{property.city}</b></small></p>
                       <h6 className="mb-0 text-capitalize">{property.title}</h6>
                       <p className="mb-0 "><small>${property.price_per_night} USD/night</small></p>
                     </a>
-                    <div>
-                      <SkeletonTheme color="#999999" >
-                        <Skeleton width={"100%"} style={{ borderRadius: 10, paddingTop: "60%" }} />
-                        <Skeleton width={"20%"} />
-                        <Skeleton width={"75%"} />
-                        <Skeleton width={"30%"} />
-                      </SkeletonTheme>
-                    </div>
-                  </motion.div>
+                  </div>
                 )
               })}
+
+              
+
             </div>
 
             {/* {loading && <p>loading...</p>} */}

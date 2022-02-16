@@ -3,8 +3,8 @@
 
 .property {
   .property-image {
-    padding-top: calc(2 / 3 * 100%); /* aspect ratio 3:2 */
-    //  aspect-ratio: 3 / 2;
+    // padding-top: calc(2 / 3 * 100%); /* aspect ratio 3:2 */
+     aspect-ratio: 3 / 2;
     background-size: cover;
     background-position: center;
   }
@@ -14,7 +14,9 @@
   &.islogged-in {
     margin-left: 80px;
   }
-
+  
+  
+  
   .empty-search {
     position: fixed;
     top: 50%;

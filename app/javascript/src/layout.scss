@@ -19,6 +19,18 @@ nav.navbar {
     z-index: 1;
 }
 
+@media (max-width:400px) {
+    nav .dropdown button {
+        font-size: 12px;
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    }
+
+}
+
 #sidebar {
     position: fixed;
     left: 0;

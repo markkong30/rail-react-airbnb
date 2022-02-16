@@ -20,3 +20,5 @@ import 'popper.js'
 import 'bootstrap/dist/css/bootstrap'
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'framer-motion/dist/framer-motion';
+import 'react-loading-skeleton/dist/skeleton.css'
+
