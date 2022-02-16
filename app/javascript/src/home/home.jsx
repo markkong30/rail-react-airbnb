@@ -26,7 +26,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
       fetch('/api/properties?page=1')
         .then(handleErrors)
         .then(data => {
@@ -38,7 +37,6 @@ class Home extends React.Component {
             loading: false,
           })
         })
-    }, 1000)
   }
 
   searchProperties = (e) => {

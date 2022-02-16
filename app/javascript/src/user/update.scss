@@ -185,12 +185,13 @@
 
     &:hover {
         background: white;
+        border: 1px solid red;
         color: red;
     }
 }
 .btn-update:hover {
     background-position: right center; /* change the direction of the change here */
-    color: #fff;
+    color: rgb(252, 216, 216);
     text-decoration: none;
 }
 

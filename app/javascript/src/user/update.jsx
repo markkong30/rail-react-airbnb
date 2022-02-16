@@ -83,16 +83,18 @@ class Update extends React.Component {
         });
 
         let item;
-        if (item == '') {
-            setTimeout(() => {
-                this.setState({ pending: false, messageFail: true });
-            }, 2000)
-            return;
-        }
+        
         if (this.state.updateItem !== 'image') {
             item = document.querySelector('#update-input-submit').value;
         } else if (this.state.updateItem == 'image') {
             item = document.querySelector('#update-input-submit').files[0];
+        }
+
+        if (item == '' || item == undefined) {
+            setTimeout(() => {
+                this.setState({ pending: false, messageFail: true });
+            }, 2000)
+            return;
         }
 
         const form = document.getElementById('updateform')

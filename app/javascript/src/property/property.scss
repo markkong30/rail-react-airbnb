@@ -6,3 +6,16 @@
       height: 400px;
     }
   }
+
+  #property {
+    margin-left: 80px;
+  }
+
+  @media (max-width: 500px) {
+    .description {
+      font-size: 0.8rem
+    }
+    .title {
+      font-size: 1.2rem;
+    }
+  }
