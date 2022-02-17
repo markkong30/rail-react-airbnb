@@ -18,14 +18,21 @@
     width: 100px;
 }
 
-  
-
 @media (max-width: 500px) {
     .switch-views {
         h3 {
             font-size: 1.2rem;
             margin-top: 3px;
         }
-        
+    }
+
+    .tooltip-views:hover::after {
+        left: 200px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tooltip-views:hover::after {
+        left: 150px;
     }
 }

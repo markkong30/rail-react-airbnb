@@ -157,7 +157,7 @@ class Update extends React.Component {
             <div id="listbody">
                 <div className="container">
                     <div id="update">
-                        <div className=" update-table py-3 mb-5">
+                        <div className="update-table py-3 mb-5">
                             {loading && <p>loading...</p>}
                             <p className="section-title">Your Hosting Properties</p>
                             <table>
