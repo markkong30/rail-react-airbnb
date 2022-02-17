@@ -8,8 +8,10 @@
   }
 
   #property {
-    margin-left: 80px;
-  }
+    &.logged-in {
+
+      margin-left: 80px;
+    }
 
   @media (max-width: 500px) {
     .description {
@@ -18,4 +20,11 @@
     .title {
       font-size: 1.2rem;
     }
+
+    span.numbers {
+      display: inline-block;
+      font-size: 0.85rem;
+    }
+  }
+
   }

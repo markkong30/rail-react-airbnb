@@ -248,7 +248,8 @@ class Home extends React.Component {
                 return (
                   <motion.div layout key={property.id} className="col-12 col-sm-6 col-lg-4 mb-4 property">
                     <a href={`/property/${property.id}`} className="text-body text-decoration-none d-none">
-                      {<img className="property-image mb-1 rounded img-fluid" src={property.image_url || property.image} onLoad={this.handleImageLoaded} />}
+                      {<img className="property-image mb-1 rounded" src={property.image_url || property.image} onLoad={this.handleImageLoaded} />}                      
+                   
                       {/* <Skeleton width={"100%"} style={{ borderRadius: 10, paddingTop: "60%" }} /> */}
                       <p className="text-uppercase mb-0 text-secondary"><small><b>{property.city}</b></small></p>
                       <h6 className="mb-0 text-capitalize">{property.title}</h6>

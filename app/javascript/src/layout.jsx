@@ -130,7 +130,7 @@ class Layout extends React.Component {
               <div className="menu-bar">
                 <div className="upper-menu">
                   <div className="profile-links">
-                    <div className="btn-profile" onClick={null}>
+                    <div className="btn-profile">
                       {image ?
                         <img className='profile' src={image} />
                         :

@@ -10,6 +10,7 @@ class Property extends React.Component {
   state = {
     property: {},
     loading: true,
+    isLoggedIn: false,
   }
 
   componentDidMount() {
@@ -24,8 +25,13 @@ class Property extends React.Component {
       })
   }
 
+  isLoggedIn = () => {
+    this.setState({ isLoggedIn: true });
+  }
+
+
   render () {
-    const { property, loading } = this.state;
+    const { property, loading, isLoggedIn } = this.state;
     if (loading) {
       return <p>loading...</p>;
     };
@@ -48,9 +54,9 @@ class Property extends React.Component {
     } = property
 
     return (
-      <Layout>
+      <Layout isLoggedIn={this.isLoggedIn}>
         <div className="property-image mb-4" style={{ backgroundImage: `url(${image_url || image})` }} />
-        <div id="property">
+        <div id="property" className={isLoggedIn ? 'logged-in': ''}>
         <div className="container">
           <div className="row d-flex justify-content-center">
             <div className="info col-12 col-lg-7">
@@ -62,10 +68,10 @@ class Property extends React.Component {
               <div>
                 <p className="mb-0 text-capitalize"><b>{property_type}</b></p>
                 <p>
-                  <span className="mr-3">{max_guests} guests</span>
-                  <span className="mr-3">{bedrooms} bedroom</span>
-                  <span className="mr-3">{beds} bed</span>
-                  <span className="mr-3">{baths} bath</span>
+                  <span className="mr-3 numbers">{max_guests} guests</span>
+                  <span className="mr-3 numbers">{bedrooms} bedroom</span>
+                  <span className="mr-3 numbers">{beds} bed</span>
+                  <span className="mr-3 numbers">{baths} bath</span>
                 </p>
               </div>
               <hr />
